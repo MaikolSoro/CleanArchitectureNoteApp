@@ -24,7 +24,6 @@ import androidx.core.graphics.ColorUtils
 import com.example.cleanarchitecturenoteapp.feature_note.domain.model.Note
 
 @Composable
-
 fun NoteItem(
     note: Note,
     modifier: Modifier = Modifier,
