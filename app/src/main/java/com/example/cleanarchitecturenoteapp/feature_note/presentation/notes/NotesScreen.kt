@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.notes.components.NoteItem
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.notes.components.OrderSection
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.notes.viewmodel.NotesViewModel
+import com.example.cleanarchitecturenoteapp.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
@@ -35,14 +36,14 @@ fun NoteScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    navController.navigate(Screen.AddEditNoteScreen.route)
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
             }
         },
-        scaffoldState = scaffoldState,
+        scaffoldState = scaffoldState
     ) {
         Column(
             modifier = Modifier
@@ -92,23 +93,25 @@ fun NoteScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-
+                                navController.navigate(
+                                    Screen.AddEditNoteScreen.route +
+                                            "?noteId=${note.id}&noteColor=${note.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
                             scope.launch {
                                 val result = scaffoldState.snackbarHostState.showSnackbar(
-                                    message = "Not deleted",
+                                    message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
-                                if (result == SnackbarResult.ActionPerformed) {
+                                if(result == SnackbarResult.ActionPerformed) {
                                     viewModel.onEvent(NotesEvent.RestoreNote)
                                 }
                             }
                         }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-
                 }
             }
         }

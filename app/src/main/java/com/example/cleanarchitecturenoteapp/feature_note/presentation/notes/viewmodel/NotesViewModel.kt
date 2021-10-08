@@ -36,9 +36,8 @@ class NotesViewModel @Inject constructor(
 
     fun onEvent(event: NotesEvent) {
         when (event) {
-
             is NotesEvent.Order -> {
-                if (state.value.noteOrder::class == event.noteOrder::class.java &&
+                if (state.value.noteOrder::class == event.noteOrder::class &&
                     state.value.noteOrder.orderType == event.noteOrder.orderType
                 ) {
                     return
