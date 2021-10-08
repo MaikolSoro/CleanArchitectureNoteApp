@@ -18,6 +18,23 @@ Clean architecture Note App
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
 ![ANDROID ROOM DB DIAGRAM](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
+# NoteApp ❤️
+<table style="width:100%">
+  <tr>
+    <th>1. Notes Screen </th>
+    <th>2. Notes Screen with Order Section </th> 
+    <th>3. Add Note Screen  </th>
+    <th>4. Edit Note Screen  </th> 
+  </tr>
+  <tr>
+    <td><img src = "https://user-images.githubusercontent.com/46753453/136620467-9589b9e4-fa19-43a1-9d08-533f3fc1ea68.png"/></td> 
+    <td><img src = "https://user-images.githubusercontent.com/46753453/136620541-480faf6d-b932-4db0-b493-c8794810fd63.png"/></td>
+    <td><img src = "https://user-images.githubusercontent.com/46753453/136620581-1b363dad-424f-4df2-b4a9-ad563a3af514.png"/></td> 
+    <td><img src = "https://user-images.githubusercontent.com/46753453/136621258-0ce9ed4f-8794-4ca6-ada1-da0b70c98f6d.png"/></td> 
+   
+  </tr>
+</table>
+
 ### Contributing 🔥⚡
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
