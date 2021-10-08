@@ -34,7 +34,7 @@ fun NoteItem(
     Box(
         modifier = modifier
     ) {
-        Canvas(modifier = Modifier.fillMaxWidth()) {
+        Canvas(modifier = Modifier.matchParentSize()) {
             val clipPath = Path().apply {
                 lineTo(size.width - cutCornerSize.toPx(), 0f)
                 lineTo(size.width, cutCornerSize.toPx())
@@ -42,6 +42,7 @@ fun NoteItem(
                 lineTo(0f, size.height)
                 close()
             }
+
             clipPath(clipPath) {
                 drawRoundRect(
                     color = Color(note.color),
@@ -53,7 +54,7 @@ fun NoteItem(
                         ColorUtils.blendARGB(note.color, 0x000000, 0.2f)
                     ),
                     topLeft = Offset(size.width - cutCornerSize.toPx(), -100f),
-                    size = Size(cornerRadius.toPx() + 100f, cutCornerSize.toPx()  + 100f),
+                    size = Size(cutCornerSize.toPx() + 100f, cutCornerSize.toPx() + 100f),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
             }
@@ -82,13 +83,13 @@ fun NoteItem(
         }
         IconButton(
             onClick = onDeleteClick,
-            modifier =  Modifier.align(Alignment.BottomEnd)
+            modifier = Modifier.align(Alignment.BottomEnd)
         ) {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = "Delete note"
+                contentDescription = "Delete note",
+                tint = MaterialTheme.colors.onSurface
             )
         }
     }
-
 }

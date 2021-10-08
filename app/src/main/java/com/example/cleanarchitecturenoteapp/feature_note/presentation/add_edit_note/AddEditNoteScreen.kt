@@ -1,7 +1,6 @@
 package com.example.cleanarchitecturenoteapp.feature_note.presentation.add_edit_note
 
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,7 +20,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import androidx.core.app.AppLaunchChecker
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cleanarchitecturenoteapp.feature_note.domain.model.Note
@@ -38,7 +36,8 @@ fun AddEditNoteScreen(
     viewModel: AddEditNoteViewModel = hiltViewModel()
 ) {
     val titleState = viewModel.noteTitle.value
-    val contentState = viewModel.noteContent
+    val contentState = viewModel.noteContent.value
+
     val scaffoldState = rememberScaffoldState()
 
     val noteBackgroundAnimatable = remember {
@@ -62,24 +61,23 @@ fun AddEditNoteScreen(
             }
         }
     }
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
                     viewModel.onEvent(AddEditNoteEvent.SaveNote)
-                }, backgroundColor = MaterialTheme.colors.primary
+                },
+                backgroundColor = MaterialTheme.colors.primary
             ) {
-                Icon(
-                    imageVector = Icons.Default.Save,
-                    contentDescription = "Save note"
-                )
+                Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
             }
         },
         scaffoldState = scaffoldState
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .background(noteBackgroundAnimatable.value)
                 .padding(16.dp)
         ) {
@@ -101,7 +99,8 @@ fun AddEditNoteScreen(
                                 width = 3.dp,
                                 color = if (viewModel.noteColor.value == colorInt) {
                                     Color.Black
-                                } else Color.Transparent
+                                } else Color.Transparent,
+                                shape = CircleShape
                             )
                             .clickable {
                                 scope.launch {
@@ -131,19 +130,17 @@ fun AddEditNoteScreen(
                 singleLine = true,
                 textStyle = MaterialTheme.typography.h5
             )
-
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
-                text = titleState.text,
-                hint = titleState.hint,
+                text = contentState.text,
+                hint = contentState.hint,
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
                 },
                 onFocusChange = {
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                 },
-                isHintVisible = titleState.isHintVisible,
-                singleLine = true,
+                isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.body1,
                 modifier = Modifier.fillMaxHeight()
             )
