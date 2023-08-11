@@ -1,23 +1,21 @@
 package com.example.cleanarchitecturenoteapp.feature_note.presentation.notes
 
-import android.app.Application
-import android.content.Context
+import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.test.core.app.ApplicationProvider
 import com.example.cleanarchitecturenoteapp.core.util.TestTags
 import com.example.cleanarchitecturenoteapp.di.AppModule
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.MainActivity
 import com.example.cleanarchitecturenoteapp.feature_note.presentation.util.Screen
 import com.example.cleanarchitecturenoteapp.ui.theme.CleanArchitectureNoteAppTheme
-import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -40,9 +38,10 @@ class NotesScreenTest {
     @Before
     fun setup() {
         hiltRule.inject()
-        composeRule.setContent {
-            val navController = rememberNavController()
+       composeRule.activity.setContent {
+
             CleanArchitectureNoteAppTheme {
+                val navController = rememberNavController()
                 NavHost(
                     navController = navController,
                     startDestination = Screen.NotesScreen.route
